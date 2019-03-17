@@ -39,12 +39,6 @@ N_plot = 10; % Number of particles to show in motion plot
 % Collision Type
 collision_type = 0; % 0 = specular, 1 = diffusive
 
-% Geometry
-% Rectangles
-%       pos_x       pos_y       width       height
-rec = [ 080E-9      000E-9      040E-9      080E-9   ;
-        080E-9      120E-9      040E-9      080E-9   ];
-
 % Calculated values
 vth = sqrt(2*physconst('Boltzmann')*T/mn); % mean thermal velocity
 lambda = vth*Tmn; % mean free path
