@@ -7,41 +7,8 @@
 % Top level file which runs simulation       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%% User Paramaters %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-T = 300; % K, Temperature
-m0 = 9.109383E-31; % Kg, rest mass of electron
-mn = 0.26*m0; % effective mass of electron
-Tmn = 0.2E-12; % s, mean time between collisions
-
-steps = 1000; % Run simulation for 100 steps
-dt = 200E-9/1E8; % s, simulation step time
-
-N = 10000; % Number of particles
-N_plot = 10; % Number of particles to show in motion plot
-
-% Simulation bounds
-size_x = 200E-9; % m
-size_y = 200E-9; % m
-
-% Rectangles
-%       pos_x       pos_y       width       height
-rec = [ 080E-9      000E-9      040E-9      080E-9   ;
-        080E-9      120E-9      040E-9      080E-9   ];
-
-collision_type = 0; % 0 = specular, 1 = diffusive
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% End User Paramaters %%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Calculated values
 addpath code
-vth = sqrt(2*physconst('Boltzmann')*T/mn); % mean thermal velocity
-lambda = vth*Tmn; % mean free path
-Pscat = 1 - exp(-dt/Tmn);
+
 
 % randomly select the indexes which we are going to plot
 index_plot = randperm(N, N_plot);
