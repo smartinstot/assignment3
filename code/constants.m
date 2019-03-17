@@ -16,7 +16,7 @@ C.c = 299792458;                    % speed of light
 T = 300; % K, Temperature
 mn = 0.26*C.m_0; % effective mass of electron
 Tmn = 0.2E-12; % s, mean time between collisions
-V0 = 0.1; % Differential Voltage
+V0 = 1; % Differential Voltage
 
 % Material Properties
 sigma_conduct = 1; % Moh
@@ -31,7 +31,7 @@ nx = 75;
 ny = 50;
 
 % Simulation Runtime
-steps = 1000; % Run simulation for 100 steps
+steps = 10; % Run simulation for 100 steps
 dt = 200E-9/1E8; % s, simulation step time
 N = 10000; % Number of particles
 N_plot = 10; % Number of particles to show in motion plot

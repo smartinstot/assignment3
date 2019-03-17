@@ -1,7 +1,8 @@
-function [f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
+function [f_e, f_v, f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
 %MONTE_CARLO Runs the monte carlo simulation under the electric field
 
     constants;
+    
     
     % randomly select the indexes which we are going to plot
     index_plot = randperm(N, N_plot);
@@ -10,7 +11,26 @@ function [f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
     [P_x, P_y] = inital_placement(N, size_x, size_y, rec);
     [V_x, V_y] = thermal_velocity(N, T, mn);
     
-    [E_x, E_y] = calculateE(nx, ny, V0, sigma_conduct, sigma_insulate, size_x, size_y, rec);
+    [E_x, E_y, V] = calculateE(nx, ny, V0, sigma_conduct, sigma_insulate, size_x, size_y, rec);
+    
+    f_v = figure();
+    hold on;
+    surf(linspace(0,size_y,ny), linspace(0,size_x,nx), V,'EdgeColor','none','LineStyle','none');
+    c = colorbar;
+    c.Label.String = 'Potential (V)';
+    xlabel('x');
+    ylabel('y');
+    view([120+180 25]);
+    
+    f_e = figure();
+    hold on;
+    [Ex, Ey] = calculateE(nx, ny, V0, sigma_conduct, sigma_insulate, size_x, size_y, rec);
+    contourf(linspace(0,size_y,ny), linspace(0,size_x,nx), sqrt(Ex.^2+Ey.^2),'EdgeColor','none','LineStyle','none');
+    quiver(linspace(0,size_y,ny), linspace(0,size_x,nx), Ex, Ey);
+    c = colorbar;
+    c.Label.String = '|E| (V/m)';
+    xlabel('x');
+    ylabel('y');
     
     f_path = figure('Name', 'Particle Path');
     hold on;
@@ -78,7 +98,6 @@ function [f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
         % Apply acceleration to the electroncs
         V_x = V_x + (C.q_0.*P_E_x./C.m_0)*dt;
         V_y = V_y + (C.q_0.*P_E_y./C.m_0)*dt;
-        V_x(1)
         
         % Plot path of particle
         figure(f_path);
