@@ -76,8 +76,9 @@ function [f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
         end
         
         % Apply acceleration to the electroncs
-        V_x = V_x + C.q_0.*P_E_x./C.m_0;
-        V_y = V_y + C.q_0.*P_E_y./C.m_0;
+        V_x = V_x + (C.q_0.*P_E_x./C.m_0)*dt;
+        V_y = V_y + (C.q_0.*P_E_y./C.m_0)*dt;
+        V_x(1)
         
         % Plot path of particle
         figure(f_path);

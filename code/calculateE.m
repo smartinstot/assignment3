@@ -3,7 +3,9 @@ function [Ex, Ey] = calculateE(nx, ny, V0, sigma_conduct, sigma_insulate, size_x
     cMap = conductionMap(nx, ny, sigma_conduct, sigma_insulate, size_x, size_y, rec);
     V = numeric(nx, ny, cMap, Inf, Inf, 0, V0);
     [Ex, Ey] = gradient(V);
-    Ex = -Ex;
-    Ey = -Ey;
+    dx = size_x/nx;
+    dy = size_y/ny;
+    Ex = -Ex/dx;
+    Ey = -Ey/dy;
 end
 

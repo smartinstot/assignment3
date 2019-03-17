@@ -12,15 +12,15 @@ constants;
 %       pos_x       pos_y       width       height
 rec = [ 080E-9      000E-9      040E-9      080E-9   ;
         080E-9      120E-9      040E-9      080E-9   ];
-
-f1 = figure();
+rec = [];
+% f1 = figure();
 cMap = conductionMap(nx, ny, sigma_conduct, sigma_insulate, size_x, size_y, rec);
-contourf(linspace(0,size_y,ny), linspace(0,size_x,nx), cMap,'EdgeColor','none','LineStyle','none');
-shading interp 
-xlabel('x');
-ylabel('y');
-zlabel('Conduction (Mho)');
-
+% contourf(linspace(0,size_y,ny), linspace(0,size_x,nx), cMap,'EdgeColor','none','LineStyle','none');
+% shading interp 
+% xlabel('x');
+% ylabel('y');
+% zlabel('Conduction (Mho)');
+V0 = 1;
 f2 = figure();
 hold on;
 [Ex, Ey] = calculateE(nx, ny, V0, sigma_conduct, sigma_insulate, size_x, size_y, rec);
