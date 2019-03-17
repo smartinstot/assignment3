@@ -1,4 +1,4 @@
-function [f_e, f_v, f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
+function [f_e, f_v, f_plot, f_path, f_hist, f_eldn, f_temp, f_i] = monte_carlo(rec, V0)
 %MONTE_CARLO Runs the monte carlo simulation under the electric field
 
     constants;
@@ -63,6 +63,12 @@ function [f_e, f_v, f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
     f_hist = figure('Name', 'Velocity');
     xlabel('Velocity (m/s)');
     ylabel('Number of Particles');
+    
+    f_i = figure('Name', 'Current');
+    hold on;
+    title('Current');
+    xlabel('Time (s)');
+    ylabel('Current (A)');
 
     % Simulation loop
     for n=0:(steps-1)
@@ -121,7 +127,8 @@ function [f_e, f_v, f_plot, f_path, f_hist, f_eldn, f_temp] = monte_carlo(rec)
         figure(f_hist);
         histogram(sqrt(V_x.^2 + V_y.^2), 1000, 'FaceColor', 'b');
 
-
+        figure(f_i);
+        plot(t, (sum(V_x)/N)*C.q_0*C.cd, 'xb');
         %pause(0.01);
 
         [V_x, V_y, P_x, P_y] = collisions(V_x, V_y, P_x, P_y, size_x, size_y, rec, collision_type, T, mn);
